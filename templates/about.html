@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}ჩვენ შესახებ — ZUBA{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section class="about">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-7">
+        <h1 class="display-5 fw-bold">ჩვენ შესახებ</h1>
+        <p class="lead text-muted">ZUBA INC არის თანამედროვე ციფრული ბანკი — ჩვენი მისიაა ფინანსური მომსახურება გახადოს მარტივი, უსაფრთხო და მეგობრული ყოველი მომხმარებლისთვის.</p>
+        <p>ჩვენ არ ვქმნით მორიგ საბანკო აპლიკაციას, ჩვენ ვაშენებთ ახალ ფინანსურ ეკოსისტემას. ZUBA INC დაიბადა იმ იდეით, რომ ტექნოლოგია უნდა მუშაობდეს ადამიანისთვის და არა პირიქით.</p>
+        <p class="mt-4">
+          <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg me-2">დარეგისტრირდი</a>
+          <a href="{{ url_for('main.contact') }}" class="btn btn-outline-secondary btn-lg">დაგვიკავშირდით</a>
+        </p>
+      </div>
+      <div class="col-md-5 text-center">
+        <img src="{{ url_for('static', filename='img/Gemini_Generated_Image_ifvuw5ifvuw5ifvu.png') }}" alt="ინფოგრაფიკა" class="img-fluid" style="max-height:240px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <h2 class="h3 mb-4">ჩვენი ღირებულებები</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <div class="mb-3 fs-2 text-primary"><i class="bi-shield-lock"></i></div>
+            <h5 style="color: white;">უსაფრთხოება</h5>
+            <p style="color: white;">მტკიცე დაშიფვრა, ლიმიტირებული წვდომა და გამჭვირვალე პოლიტიკა — თქვენი თანხები დაცულია.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <div class="mb-3 fs-2 text-success"><i class="bi-graph-up"></i></div>
+            <h5 style="color: white;">ინოვაცია</h5>
+            <p style="color: white;">მოდერნიზირებული პროცესები და მარტივი ინტერფეისი, რომელიც ზრდის ეფექტურობას და იოლად მართავს ფინანსებს.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <div class="mb-3 fs-2 text-warning"><i class="bi-people"></i></div>
+            <h5 style="color: white;">მომხმარებლის მომსახურება</h5>
+            <p style="color: white;">მომხმარებლები ჩვენი პრიორიტეტია — სწრაფი მხარდაჭერა და პერსონალური მიდგომა.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team">
+  <div class="container">
+    <h2 class="h3 mb-4">გუნდის წევრები</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 text-center border-0 shadow-sm">
+          <img src="{{ url_for('static', filename='img/zuka.jpeg') }}" class="card-img-top rounded-circle mx-auto mt-3" alt="Team member" style="width:120px;height:120px;object-fit:cover;">
+          <div class="card-body">
+            <h5 style="color: white;">ზუკა აბაშიძე</h5>
+            <small style="color: white;">CEO & Founder</small>
+            <p style="color: white;">ჩვენ არ ვქმნით მხოლოდ ბანკს, ჩვენ ვაშენებთ ციფრულ ეკოსისტემას, სადაც ფინანსური თავისუფლება ყველასთვის ხელმისაწვდომია. ჩვენი მიზანია, ტექნოლოგიები ადამიანების კეთილდღეობას დავუმორჩილოთ."</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-4">
+        <div class="card h-100 text-center border-0 shadow-sm">
+          <img src="{{ url_for('static', filename='img/tedoie.jpg') }}" class="card-img-top rounded-circle mx-auto mt-3" alt="Team member" style="width:120px;height:120px;object-fit:cover;">
+          <div class="card-body">
+            <h5 style="color: white;">თეოდორე რატიანი</h5>
+            <small style="color: white;">Owner</small>
+            <p style="color: white;">ინოვაცია მუდმივი პროცესია და არა საბოლოო წერტილი. ჩვენ მუდმივად ვნერგავთ უახლეს სტანდარტებს, რათა საბანკო ოპერაციები იყოს ისეთივე მარტივი და სწრაფი, როგორიც ერთი შეხებაა.</p>
+          </div>
+        </div>
+      </div>
+    
+
+      <div class="col-md-4">
+        <div class="card h-100 text-center border-0 shadow-sm">
+          <img src="{{ url_for('static', filename='img/mari.jpg') }}" class="card-img-top rounded-circle mx-auto mt-3" alt="Team member" style="width:120px;height:120px;object-fit:cover;">
+          <div class="card-body">
+            <h5 style="color: white;">მ.ბ</h5>
+            <small style="color: white;">Co-Owner</small>
+            <p style="color: white;">ZUBA-ს საფუძველი ნდობა და გამჭვირვალობაა. ჩემთვის მთავარია, თითოეული მომხმარებელი გრძნობდეს, რომ მისი კაპიტალი საიმედო ხელშია. ჩვენი წარმატება თქვენს დაცულობასა და ზრდაშია</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-5 text-center">
+  <div class="container">
+    <h3 class="h4 mb-3">გახდი ZUBA-ს ნაწილი დღეს</h3>
+    <p class="text-muted mb-4">დარეგისტრირდი და გახსენი უფრო მარტივი ფინანსური ცხოვრება.</p>
+    <a href="{{ url_for('auth.register') }}" class="btn btn-lg btn-primary">დარეგისტრირდი</a>
+  </div>
+</section>
+
+{% endblock %}

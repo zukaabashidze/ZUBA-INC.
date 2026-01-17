@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    /* მთავარი მუქი ფონი */
+    .zuba-body {
+        background-color: #05050500;
+        color: #ffffff;
+        padding: 80px 0;
+        overflow: hidden;
+    }
+
+    .section-title {
+        font-weight: 900;
+        text-align: center;
+        margin-bottom: 60px;
+        letter-spacing: 2px;
+    }
+
+    .bank-pink {
+        color: rgba(255, 18, 114, 1);
+        text-shadow: 0 0 15px rgba(255, 18, 114, 0.6);
+    }
+
+    /* ბარათის დიზაინი */
+    .card-zuba {
+        background: rgba(15, 15, 15, 1);
+        border: 1px solid rgba(255, 18, 114, 0.2);
+        border-radius: 30px;
+        padding: 40px 30px;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s ease;
+        z-index: 1;
+    }
+
+    /* ჩახატული სქემების ეფექტი ფონზე */
+    .card-zuba::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            linear-gradient(rgba(255, 18, 114, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 18, 114, 0.05) 1px, transparent 1px);
+        background-size: 20px 20px; /* ბადისებრი ჩახატვა */
+        opacity: 0.3;
+        z-index: -1;
+    }
+
+    .card-zuba:hover {
+        transform: translateY(-15px);
+        border-color: rgba(255, 18, 114, 1);
+        box-shadow: 0 0 30px rgba(255, 18, 114, 0.2);
+    }
+
+
+
+    .card-zuba:hover::after {
+        opacity: 1;
+    }
+
+    @keyframes rotateLine {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* ხატულას კონტეინერი "ჩახატული" დეტალებით */
+    .icon-box {
+        width: 90px;
+        height: 90px;
+        margin: 0 auto 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border: 2px dashed rgba(255, 18, 114, 0.5); /* ჩახაზული ჩარჩო */
+        border-radius: 50%;
+        color: rgba(255, 18, 114, 1);
+        font-size: 35px;
+        background: rgba(255, 18, 114, 0.05);
+        transition: 0.4s;
+    }
+
+    .card-zuba:hover .icon-box {
+        background: rgba(255, 18, 114, 1);
+        color: white;
+        border-style: solid;
+        box-shadow: 0 0 20px rgba(255, 18, 114, 0.8);
+    }
+
+    .step-number {
+        font-size: 14px;
+        font-weight: bold;
+        color: rgba(255, 18, 114, 1);
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    /* ღილაკი რეგისტრაციისთვის */
+    .btn-register {
+        background: linear-gradient(45deg, rgba(255, 18, 114, 1), #ff4d94);
+        color: white;
+        padding: 18px 50px;
+        border-radius: 50px;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 50px;
+        transition: 0.3s;
+        border: none;
+        box-shadow: 0 5px 20px rgba(255, 18, 114, 0.4);
+    }
+
+    .btn-register:hover {
+        transform: scale(1.1);
+        color: white;
+        box-shadow: 0 8px 30px rgba(255, 18, 114, 0.7);
+    }
+
+    /* ახალი სტატისტიკის სექცია */
+    .stats {
+        margin-top: 100px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .stat-item h2 {
+        font-weight: 800;
+        color: rgba(255, 18, 114, 1);
+        margin-bottom: 5px;
+    }
+
+    .stat-item p {
+        font-size: 14px;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .step-number {
+        font-size: 14px;
+        font-weight: bold;
+        color: rgba(255, 18, 114, 1);
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+        display: block;
+    }
+</style>
+
+<div class="zuba-body">
+    <div class="container text-center">
+        <h2 class="section-title">როგორ მუშაობს <span class="bank-pink">ZUBA ბანკი</span>?</h2>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card-zuba">
+                    <span class="step-number">01 // დაიწყე</span>
+                    <div class="icon-box">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <h4 class="fw-bold">რეგისტრაცია</h4>
+                    <p style="color: #aaa;">შექმენი შენი უნიკალური ID წამებში. სისტემა ავტომატურად ჩახაზავს შენს ციფრულ საფულეს.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card-zuba">
+                    <span class="step-number">02 // მიიღე წვდომა</span>
+                    <div class="icon-box">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h4 class="fw-bold">ავტორიზაცია</h4>
+                    <p style="color: #aaa;">ორმაგი დაშიფვრა და ბიომეტრიული კონტროლი. შენი მონაცემები მხოლოდ შენია.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card-zuba">
+                    <span class="step-number">03 // აკონტროლე </span>
+                    <div class="icon-box">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4 class="fw-bold">მართვა</h4>
+                    <p style="color: #aaa;">მართე ფინანსური ნაკადები AI ანალიტიკის დახმარებით. ყველაფერი ხელისგულზეა.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="row">
+                <div class="col-md-4 stat-item">
+                    <h2>10K+</h2>
+                    <p>აქტიური მომხმარებელი</p>
+                </div>
+                <div class="col-md-4 stat-item border-start border-end border-secondary">
+                    <h2>$2.5M</h2>
+                    <p>ყოველთვიური ბრუნვა</p>
+                </div>
+                <div class="col-md-4 stat-item">
+                    <h2>99.9%</h2>
+                    <p>დაცული ტრანზაქცია</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="{{ url_for('auth.register') }}" class="btn-register">
+            <i class="fas fa-user-plus me-2"></i> დარეგისტრირდი ახლავე
+        </a>
+    </div>
+</div>
+
+{% endblock %}

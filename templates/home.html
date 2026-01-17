@@ -1,0 +1,380 @@
+{% extends "base.html" %}
+
+{% block title %}მთავარი — ZUBA{% endblock %}
+
+{% block head %}
+<link href="https://fonts.googleapis.com/css2?family=Fira+GO:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --primary-neon: #ff1a75;
+        --secondary-neon: #00d4ff;
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+        font-family: 'Fira GO', sans-serif;
+        background-color: #0a0b10;
+        color: #ffffff;
+    }
+
+    .btn-neon {
+        background: var(--primary-neon);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        box-shadow: 0 5px 15px rgba(255, 26, 117, 0.4);
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-neon:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 25px rgba(255, 26, 117, 0.7);
+        color: white;
+    }
+
+    .btn-outline-custom {
+        background: transparent;
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 12px 30px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-outline-custom:hover {
+        transform: scale(1.1);
+        border-color: var(--secondary-neon);
+        background: rgba(0, 212, 255, 0.1);
+        color: white;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    } 
+
+    .hero {
+        background: linear-gradient(135deg, rgba(10, 11, 16, 0.8) 0%, rgba(255, 26, 117, 0.1) 100%), 
+                    url('https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=2071');
+        background-size: cover;
+        background-position: center;
+        border-radius: 30px;
+        border: 1px solid var(--glass-border);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(circle at top right, rgba(255, 26, 117, 0.15), transparent);
+    }
+
+    .glass-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .currency-tag {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--glass-border);
+        border-radius: 15px;
+        padding: 12px 25px;
+        margin: 8px;
+        transition: 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .currency-tag:hover {
+        background: rgba(255, 26, 117, 0.1);
+        border-color: var(--primary-neon);
+        transform: scale(1.05);
+    }
+
+    .custom-input {
+        background: rgba(0, 0, 0, 0.3) !important;
+        border: 1px solid var(--glass-border) !important;
+        color: white !important;
+        border-radius: 12px !important;
+        padding: 12px !important;
+    }
+
+    .custom-input:focus {
+        border-color: var(--primary-neon) !important;
+        box-shadow: 0 0 15px rgba(255, 26, 117, 0.3);
+    }
+
+
+    .btn-neon {
+        background: var(--primary-neon);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.3s;
+        box-shadow: 0 5px 15px rgba(255, 26, 117, 0.4);
+    }
+
+    .btn-neon:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(255, 26, 117, 0.6);
+        color: white;
+    }
+
+    .card-article {
+        border: 1px solid var(--glass-border);
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .card-article:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--primary-neon);
+        transform: translateY(-10px);
+    }
+
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 4px;
+        background: var(--primary-neon);
+        margin: 15px auto;
+        border-radius: 2px;
+}
+
+    .btn-animate {
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: inline-block;
+        text-decoration: none;
+    }
+
+    .btn-animate:hover {
+        transform: scale(1.1); 
+        box-shadow: 0 10px 20px rgba(255, 26, 117, 0.3);
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<header class="hero text-center py-5 container mt-4 shadow-2xl">
+    <div class="py-5 px-3">
+        <span class="badge rounded-pill mb-3" style="background: rgba(255, 26, 117, 0.2); color: var(--primary-neon); border: 1px solid var(--primary-neon);">Next-Gen Banking</span>
+        <h1 class="display-2 fw-bold mb-3" style="letter-spacing: -1px;">ZUBA <span style="color: var(--primary-neon);">Inc</span></h1>
+        <p class="lead mb-4 mx-auto opacity-75" style="max-width: 600px;">
+            თიბისი ტექსკოლისა და ჯეოლაბის ერთობლივი პროექტი. ჩვენ ვქმნით მომავლის ფინანსურ ეკოსისტემას.
+        </p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{{ url_for('auth.register') }}" class="btn-neon btn-animate">
+                    დაიწყე ახლავე
+                </a>
+                
+                <a href="#services" class="btn-outline-light btn-animate" 
+                style="border-radius: 12px; padding: 12px 30px; border: 1px solid rgba(255,255,255,0.3);">
+                    სერვისები
+                </a>
+            </div>
+    </div>
+</header>
+
+<section id="services" class="py-5 mt-5">
+    <div class="container">
+        <h2 class="text-center section-title">ჩვენი სერვისები</h2>
+        </div>
+</section>
+
+<section class="container mt-5">
+    <div class="glass-card p-4 text-center">
+        <h5 class="text-white-50 mb-4 text-uppercase fw-bold small" style="letter-spacing: 2px;">ლაივ კურსი (GEL)</h5>
+        <div class="d-flex flex-wrap justify-content-center">
+            <div class="currency-tag">
+                <span class="fw-bold">USD</span> <span>2.68</span> <i class="fas fa-caret-up text-success"></i>
+            </div>
+            <div class="currency-tag">
+                <span class="fw-bold">EUR</span> <span>2.91</span> <i class="fas fa-caret-down text-danger"></i>
+            </div>
+            <div class="currency-tag">
+                <span class="fw-bold">GBP</span> <span>3.42</span> <i class="fas fa-caret-up text-success"></i>
+            </div>
+            <div class="currency-tag" style="border-color: gold;">
+                <span class="fw-bold" style="color: gold;">BTC</span> <span>$96,400</span> <i class="fas fa-caret-up text-success"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="converter" class="container mt-5 pt-4">
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="glass-card p-4 p-md-5 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="h4 text-white m-0">ვალუტის კალკულატორი</h3>
+                    <i class="fas fa-sync-alt fa-spin-hover" style="color: var(--primary-neon);"></i>
+                </div>
+                
+                <div class="row align-items-center g-4">
+                    <div class="col-md-5">
+                        <div class="p-3 rounded-4" style="background: rgba(0,0,0,0.2);">
+                            <label class="text-white-50 small mb-2 d-block">გაქვთ</label>
+                            <input type="number" id="fromAmount" class="form-control custom-input mb-2" value="100" oninput="calculate()">
+                            <select id="fromCurrency" class="form-select custom-input" onchange="calculate()">
+                                <option value="GEL">GEL - ლარი</option>
+                                <option value="USD" selected>USD - დოლარი</option>
+                                <option value="EUR">EUR - ევრო</option>
+                                <option value="BTC">BTC - ბიტკოინი</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 text-center">
+                        <button class="btn btn-outline-light rounded-circle p-3 swap-btn" onclick="swapCurrencies()" style="border-color: var(--glass-border);">
+                            <i class="fas fa-exchange-alt" style="color: var(--primary-neon);"></i>
+                        </button>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="p-3 rounded-4" style="background: rgba(255, 26, 117, 0.05);">
+                            <label class="text-white-50 small mb-2 d-block">მიიღებთ</label>
+                            <input type="number" id="toAmount" class="form-control custom-input mb-2" readonly style="background: transparent !important; border-style: dashed !important;">
+                            <select id="toCurrency" class="form-select custom-input" onchange="calculate()">
+                                <option value="GEL" selected>GEL - ლარი</option>
+                                <option value="USD">USD - დოლარი</option>
+                                <option value="EUR">EUR - ევრო</option>
+                                <option value="BTC">BTC - ბიტკოინი</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 p-2 rounded-3 text-center" style="background: rgba(255,255,255,0.02);">
+                    <p id="rateInfo" class="text-white-50 small mb-0 font-monospace">1 USD = 2.6800 GEL</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="glass-card p-4 h-100">
+                <h4 class="h5 mb-4 fw-bold">უპირატესობები</h4>
+                <div class="features-list">
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="p-2 rounded-3 me-3" style="background: rgba(0, 212, 255, 0.1);"><i class="fas fa-bolt text-info"></i></div>
+                        <div>
+                            <h6 class="mb-1 small fw-bold text-white">მყისიერი</h6>
+                            <p class="text-white-50 mb-0" style="font-size: 0.8rem;">ტრანზაქცია სრულდება წამებში.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="p-2 rounded-3 me-3" style="background: rgba(255, 26, 117, 0.1);"><i class="fas fa-shield-alt" style="color: var(--primary-neon);"></i></div>
+                        <div>
+                            <h6 class="mb-1 small fw-bold text-white">დაცული</h6>
+                            <p class="text-white-50 mb-0" style="font-size: 0.8rem;">End-to-end დაშიფვრა.</p>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-neon w-100 mt-2">რეგისტრაცია</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<main class="container mt-5 pt-5 mb-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h2 class="h3 fw-bold m-0">სიახლეები</h2>
+            <div style="width: 40px; height: 3px; background: var(--primary-neon); margin-top: 8px;"></div>
+        </div>
+        <a href="#" class="text-decoration-none small text-white-50 hover-white">ყველა პოსტი <i class="fas fa-arrow-right ms-1"></i></a>
+    </div>
+
+    <div class="row g-4">
+        {% if posts %}
+            {% for post in posts %}
+            <div class="col-md-6">
+                <div class="glass-card p-4 h-100 card-article">
+                    <span class="badge mb-3" style="background: rgba(255,255,255,0.05);">ფინანსები</span>
+                    <h3 class="h5 mb-3 fw-bold">{{ post.title }}</h3>
+                    <p class="text-white-50 small mb-4 line-clamp-2">{{ post.content | truncate(120) }}</p>
+                    <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top border-secondary border-opacity-25">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-secondary me-2" style="width: 24px; height: 24px;"></div>
+                            <span class="small text-white-50">{{ post.author.username }}</span>
+                        </div>
+                        <span class="small text-white-50">{% if post.created_at %}{{ post.created_at.strftime('%d %b') }}{% endif %}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="glass-card text-center p-5 opacity-50">
+                    <i class="fas fa-folder-open mb-3 fa-2x"></i>
+                    <p>პოსტები ჯერ არ არის</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</main>
+
+<script>
+    const rates = {
+        'GEL': 1,
+        'USD': 2.68,
+        'EUR': 2.91,
+        'GBP': 3.42,
+        'BTC': 258000 
+    };
+
+    function calculate() {
+        const fromAmount = document.getElementById('fromAmount').value;
+        const fromCurr = document.getElementById('fromCurrency').value;
+        const toCurr = document.getElementById('toCurrency').value;
+
+        if (!fromAmount || fromAmount < 0) return;
+
+        const amountInGel = fromAmount * rates[fromCurr];
+        const finalAmount = amountInGel / rates[toCurr];
+
+        document.getElementById('toAmount').value = finalAmount.toFixed(2);
+        
+        const singleUnitRate = (rates[fromCurr] / rates[toCurr]).toFixed(4);
+        document.getElementById('rateInfo').innerText = `1 ${fromCurr} = ${singleUnitRate} ${toCurr}`;
+    }
+
+    function swapCurrencies() {
+        const fromCurr = document.getElementById('fromCurrency');
+        const toCurr = document.getElementById('toCurrency');
+        
+        const temp = fromCurr.value;
+        fromCurr.value = toCurr.value;
+        toCurr.value = temp;
+        
+        calculate();
+    }
+
+    window.onload = calculate;
+</script>
+
+{% endblock %}

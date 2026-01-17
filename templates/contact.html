@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block title %}დაგვიკავშირდით — ZUBA{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    /* მთავარი კონტეინერის სტილი */
+    .contact-section {
+        background-color: #05050500;
+        color: #ffffff;
+        min-height: 100vh;
+        padding: 80px 0;
+    }
+
+    .text-pink {
+        color: rgba(255, 18, 114, 1);
+        text-shadow: 0 0 10px rgba(255, 18, 114, 0.3);
+    }
+
+    /* საკონტაქტო ფორმის ბარათი */
+    .contact-form-card {
+        background: rgba(15, 15, 15, 1);
+        border: 1px solid rgba(255, 18, 114, 0.2);
+        border-radius: 25px;
+        padding: 40px;
+        transition: 0.3s;
+    }
+
+    .contact-form-card:hover {
+        border-color: rgba(255, 18, 114, 0.5);
+        box-shadow: 0 0 20px rgba(255, 18, 114, 0.1);
+    }
+
+    /* ინპუტების სტილი */
+    .zuba-input {
+        background: rgba(242, 239, 239, 0.56) !important;
+        border: 1px solid rgba(243, 235, 235, 0.628) !important;
+        color: #ffffff !important;
+        border-radius: 12px !important;
+        padding: 12px 15px !important;
+    }
+
+    .zuba-input:focus {
+        border-color: rgba(255, 18, 114, 1) !important;
+        box-shadow: 0 0 10px rgba(255, 18, 114, 0.2) !important;
+        outline: none;
+    }
+
+    /* გვერდითა საინფორმაციო ბლოკი */
+    .contact-info-panel {
+        background: linear-gradient(145deg, rgba(255, 18, 114, 0.05), rgba(0, 0, 0, 0));
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 25px;
+        padding: 40px;
+        height: 100%;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .info-icon {
+        width: 45px;
+        height: 45px;
+        background: rgba(255, 18, 114, 0.1);
+        border: 1px solid rgba(255, 18, 114, 0.3);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        color: rgba(255, 18, 114, 1);
+    }
+
+    /* ღილაკის სტილი */
+    .btn-zuba-pink {
+        background: rgba(255, 18, 114, 1);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 12px;
+        font-weight: bold;
+        transition: 0.3s;
+        width: 100%;
+    }
+
+    .btn-zuba-pink:hover {
+        background: #e00d60;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 18, 114, 0.4);
+    }
+</style>
+
+<div class="contact-section">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-7">
+                <h2 class="fw-bold mb-3">მოგვწერეთ <span class="text-pink">ZUBA</span>-ს გუნდს</h2>
+                <p class="text-muted mb-4">გაქვთ კითხვები? ჩვენ აქ ვართ დასახმარებლად.</p>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    {% for cat, msg in messages %}
+                      <div class="alert alert-{{ cat }} border-0 bg-dark text-white alert-dismissible fade show" role="alert">
+                          {{ msg }}
+                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+                      </div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+
+                <div class="contact-form-card">
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        <div class="mb-3">
+                            <label class="form-label text-muted small">თქვენი სახელი</label>
+                            {{ form.name(class='form-control zuba-input', placeholder='მაგ: ზუკა აბაშიძე') }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small">ელ-ფოსტა</label>
+                            {{ form.email(class='form-control zuba-input', placeholder='zukaabashidze70@gmail.com') }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small">შეტყობინება</label>
+                            {{ form.message(class='form-control zuba-input', rows=5, placeholder='რით შეგვიძლია დაგეხმაროთ?') }}
+                        </div>
+                        <div class="pt-2">
+                            <button type="submit" class="btn btn-zuba-pink">
+                                <i class="fas fa-paper-plane me-2"></i> გაგზავნა
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="contact-info-panel">
+                    <h4 class="fw-bold mb-4">საკონტაქტო ინფორმაცია</h4>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <p class="text-muted small mb-0">ტელეფონი</p>
+                            <p class="fw-bold mb-0">+995 558 600 207</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="text-muted small mb-0">ელ-ფოსტა</p>
+                            <p class="fw-bold mb-0">support@zuba.ge</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <p class="text-muted small mb-0">სამუშაო საათები</p>
+                            <p class="fw-bold mb-0">მოშ – პარ: 09:00 – 18:00</p>
+                        </div>
+                    </div>
+
+                    <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+
+                    <h5 class="fw-bold mb-3">სოციალური ქსელები</h5>
+                    <div class="d-flex gap-3">
+                        <a href="https://www.facebook.com/zuka.abashidze.107081" class="info-icon text-decoration-none"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/_abashidzeee_/" class="info-icon text-decoration-none"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/zuka-abashidze-2b0353358/" class="info-icon text-decoration-none"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/zukaabashidze" class="info-icon text-decoration-none"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}ავტორიზაცია — ZUBA{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    /* მთლიანი კონტეინერის ცენტრირება */
+    .auth-container {
+        background-color: #05050500;
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    /* ავტორიზაციის ბარათი */
+    .auth-card {
+        background: rgba(15, 15, 15, 1);
+        border: 1px solid rgba(255, 18, 114, 0.2);
+        border-radius: 30px;
+        padding: 50px 40px;
+        width: 100%;
+        max-width: 420px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        text-align: center;
+    }
+
+    /* ლოგოს ადგილი */
+    .auth-icon-circle {
+        width: 80px;
+        height: 80px;
+        background: rgba(255, 18, 114, 0.1);
+        border: 1px dashed rgba(255, 18, 114, 0.5);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 30px;
+        color: rgba(255, 18, 114, 1);
+        font-size: 30px;
+    }
+
+    .auth-title {
+        font-weight: 800;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+    }
+
+    /* ინპუტების სტილი */
+    .auth-input {
+        background: rgba(246, 245, 245, 0.7) !important;
+        border: 1px solid rgba(255, 254, 254, 0.744) !important;
+        color: white !important;
+        border-radius: 15px !important;
+        padding: 15px 20px !important;
+        transition: 0.3s;
+    }
+
+    .auth-input:focus {
+        border-color: rgba(255, 18, 114, 1) !important;
+        box-shadow: 0 0 15px rgba(255, 18, 114, 0.2) !important;
+        background: rgba(227, 224, 224, 0.693) !important;
+        outline: none;
+    }
+
+    /* ღილაკის სტილი */
+    .btn-auth-submit {
+        background: rgba(255, 18, 114, 1);
+        color: white;
+        border: none;
+        padding: 15px;
+        border-radius: 15px;
+        font-weight: bold;
+        width: 100%;
+        margin-top: 15px;
+        transition: 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .btn-auth-submit:hover {
+        background: #ff1272;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(255, 18, 114, 0.4);
+        color: white;
+    }
+
+    /* დამატებითი ბმულები (მაგ: რეგისტრაცია) */
+    .auth-extra-links {
+        margin-top: 25px;
+        font-size: 0.9rem;
+    }
+
+    .auth-link {
+        color: rgba(255, 18, 114, 1);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .auth-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-icon-circle">
+            <i class="fas fa-lock"></i>
+        </div>
+
+        <h2 class="auth-title text-white">შესვლა</h2>
+        <p class="text-muted small mb-4">გაიარეთ ავტორიზაცია თქვენს პანელზე წვდომისთვის</p>
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3 text-start">
+                <label class="text-muted small mb-1 ms-2">ელ-ფოსტა</label>
+                {{ form.email(class="form-control auth-input", placeholder="name@example.com") }}
+            </div>
+
+            <div class="mb-4 text-start">
+                <label class="text-muted small mb-1 ms-2">პაროლი</label>
+                {{ form.password(class="form-control auth-input", placeholder="••••••••") }}
+            </div>
+
+            {{ form.submit(class="btn btn-auth-submit") }}
+        </form>
+
+        <div class="auth-extra-links text-muted">
+            არ გაქვს ანგარიში? <a href="{{ url_for('auth.register') }}" class="auth-link">დარეგისტრირდი</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

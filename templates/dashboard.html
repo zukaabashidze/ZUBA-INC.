@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — ZUBA{% endblock %}
+
+{% block content %}
+<style>
+  :root {
+    --pink-main: #ff4d94;
+    --pink-light: #fff0f6;
+    --pink-gradient: linear-gradient(135deg, #ff4d94 0%, #ff85b2 100%);
+  }
+
+  body { background-color: #fcf8fa; }
+
+  /* ვარდისფერი ღილაკი */
+  .btn-pink {
+    background: var(--pink-gradient);
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+  }
+  .btn-pink:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
+    color: white;
+  }
+
+  /* ბალანსის მთავარი ბარათი */
+  .card-balance {
+    background: var(--pink-gradient);
+    color: white;
+    border: none;
+    border-radius: 24px;
+  }
+
+  /* სუფთა თეთრი ბარათები */
+  .card-custom {
+    background: rgba(42, 39, 39, 0.629);
+    border: none;
+    border-radius: 24px;
+    transition: transform 0.2s;
+  }
+
+  /* ტრანზაქციის ხაზები */
+  .tx-row:hover { background-color: var(--pink-light); border-radius: 12px; }
+  
+  .badge-pink {
+    background-color: var(--pink-light);
+    color: var(--pink-main);
+    font-weight: 600;
+  }
+</style>
+
+<header class="d-flex justify-content-between align-items-center mb-5">
+  <div>
+    <h2 class="fw-bold mb-1">გამარჯობა, {{ current_user.username }}! ✨</h2>
+    <p class="text-secondary small">შენი ფინანსური სამყარო ერთ სივრცეში</p>
+  </div>
+  <button class="btn btn-pink btn-lg px-4 rounded-pill shadow-sm" data-bs-toggle="modal" data-bs-target="#addTxModal">
+    + დამატება
+  </button>
+</header>
+
+<div class="row g-4 mb-5">
+  <div class="col-md-4">
+    <div class="card card-balance p-4 shadow-lg">
+      <div class="small opacity-75 mb-1 text-uppercase fw-bold">ჯამური ბალანსი</div>
+      <div class="display-5 fw-bold">{{ balance }} ₾</div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card card-custom p-4 shadow-sm border-start border-success border-4">
+      <div class="small text-muted mb-1 text-uppercase fw-bold">შემოსავალი</div>
+      <div class="h2 fw-bold text-success">+{{ income }} ₾</div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card card-custom p-4 shadow-sm border-start border-danger border-4">
+      <div class="small text-muted mb-1 text-uppercase fw-bold">გასავალი</div>
+      <div class="h2 fw-bold text-danger">-{{ expense }} ₾</div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-custom shadow-sm p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 style="color: #fcf8fa;">ბოლო მოქმედებები</h5>
+    <span class="badge badge-pink rounded-pill px-3 py-2">{{ transactions|length }} ჩანაწერი</span>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-borderless align-middle">
+      <thead>
+        <tr class="text-muted small border-bottom">
+          <th class="py-3">თარიღი</th>
+          <th class="py-3">აღწერა</th>
+          <th class="py-3 text-end">თანხა</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in transactions[:8] %}
+        <tr class="tx-row">
+          <td class="text-secondary py-3 small">{{ t.created_at.strftime('%d.%m.%y') }}</td>
+          <td class="fw-bold py-3 text-dark">{{ t.description or 'ტრანზაქცია' }}</td>
+          <td class="text-end py-3 fw-bold {% if t.amount >= 0 %}text-success{% else %}text-danger{% endif %}">
+            {{ '%.2f'|format(t.amount) }} ₾
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal fade" id="addTxModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content border-0 rounded-5 shadow-lg overflow-hidden">
+      <div class="p-4">
+        <form method="POST" action="{{ url_for('main.add_transaction') }}">
+          {{ form.hidden_tag() }}
+          <h5 class="fw-bold mb-4 text-center">ახალი ჩანაწერი</h5>
+          
+          <div class="mb-3 text-center">
+            {{ form.amount(class='form-control form-control-lg border-0 bg-light rounded-4 text-center py-3', placeholder='0.00 ₾') }}
+          </div>
+          
+          <div class="mb-4">
+            <input name="description" class="form-control border-0 bg-light rounded-4 text-center py-2" placeholder="აღწერა">
+          </div>
+
+          <div class="d-grid gap-2">
+            {{ form.submit(class='btn btn-pink btn-lg rounded-pill py-3 fw-bold', value='შენახვა') }}
+            <button type="button" class="btn btn-link text-muted text-decoration-none btn-sm" data-bs-dismiss="modal">გაუქმება</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

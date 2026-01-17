@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}რეგისტრაცია — ZUBA{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    /* Mesh Gradient ფონი - ქმნის ფერად ნისლს კუთხეში */
+    .register-viewport {
+        background-color: #05050500;
+        background-image: 
+            radial-gradient(at 0% 0%, rgba(255, 18, 113, 0) 0px, transparent 50%),
+            radial-gradient(at 100% 100%, rgba(255, 18, 113, 0) 0px, transparent 50%);
+        min-height: 95vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+        position: relative;
+    }
+
+    /* შუშის ეფექტის მქონე ბარათი */
+    .glass-morph-card {
+        background: rgba(20, 20, 20, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 40px;
+        padding: 60px 50px;
+        width: 100%;
+        max-width: 520px;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* ზედა მანათობელი ზოლი (Premium Look) */
+    .glass-morph-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(255, 18, 114, 0.8), transparent);
+    }
+
+    .form-heading {
+        font-weight: 900;
+        font-size: 2.2rem;
+        letter-spacing: -1px;
+        margin-bottom: 10px;
+        background: linear-gradient(to bottom, #fff 0%, #888 100%);
+        -webkit-background-clipს: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* ინპუტების სტილი - სრულიად მინიმალისტური */
+    .premium-input {
+        background: rgb(230, 230, 230) !important;
+        border: 1px solid rgb(255, 250, 250) !important;
+        color: #000000 !important;
+        border-radius: 16px !important;
+        padding: 16px 20px !important;
+        font-size: 1rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-bottom: 20px;
+    }
+
+    .premium-input:focus {
+        background: rgb(255, 255, 255) !important;
+        border-color: rgba(255, 18, 114, 0.6) !important;
+        box-shadow: 0 0 25px rgba(255, 18, 114, 0.15) !important;
+        transform: scale(1.02);
+        outline: none;
+    }
+
+    /* ღილაკი - "მცურავი" ნეონით */
+    .btn-neon-glow {
+        background: #ff1272;
+        color: rgb(0, 0, 0);
+        border: none;
+        padding: 18px;
+        border-radius: 18px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        width: 100%;
+        margin-top: 20px;
+        position: relative;
+        transition: 0.4s;
+        overflow: hidden;
+    }
+
+    .btn-neon-glow:hover {
+        background: #ff2d85;
+        box-shadow: 0 0 40px rgba(255, 18, 114, 0.6);
+        transform: translateY(-3px);
+    }
+
+    /* ქვედა ტექსტი */
+    .login-redirect {
+        color: #555;
+        font-size: 0.95rem;
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .login-redirect a {
+        color: #ff1272;
+        text-decoration: none;
+        font-weight: 700;
+        margin-left: 5px;
+        transition: 0.3s;
+    }
+
+    .login-redirect a:hover {
+        color: #fff;
+        text-shadow: 0 0 10px rgba(255, 18, 114, 1);
+    }
+</style>
+
+<div class="register-viewport">
+    <div class="glass-morph-card">
+        <div class="text-center mb-5">
+            <h1 class="form-heading">შემოუერთდი</h1>
+            <p style="color: #ff1272; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px;">Zuba Ecosystem</p>
+        </div>
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                {{ form.username(class="form-control premium-input", placeholder="მომხმარებლის სახელი") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.email(class="form-control premium-input", placeholder="ელ-ფოსტის მისამართი") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.password(class="form-control premium-input", placeholder="პაროლი") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.confirm_password(class="form-control premium-input", placeholder="გაიმეორეთ პაროლი") }}
+            </div>
+
+            <button type="submit" class="btn btn-neon-glow">
+                ანგარიშის გახსნა
+            </button>
+        </form>
+        
+        <div class="login-redirect">
+            უკვე ხართ წევრი? <a href="{{ url_for('auth.login') }}">შესვლა</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

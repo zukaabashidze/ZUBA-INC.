@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-center mb-4" data-sr>ადმინ პანელი</h2>
+
+<div class="row">
+    {% if users %}
+      {% for user in users %}
+      <div class="col-md-4 mb-3" data-sr>
+          <div class="card p-3">
+              <h5>{{ user.username }} <small class="text-muted">#{{ user.id }}</small></h5>
+              <p class="mb-1">Email: {{ user.email }}</p>
+              <p class="mb-1">ბალანსი: {{ '%.2f'|format(user.balance) }} ₾</p>
+              <p class="mb-0">ადმინი: {{ "✔" if user.is_admin else "❌" }}</p>
+          </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="col-12">
+        <div class="alert alert-info">თანამშრომლები არ არის.</div>
+      </div>
+    {% endif %}
+</div>
+
+{% endblock %}

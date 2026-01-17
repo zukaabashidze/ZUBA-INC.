@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ZUBA Banking - Simple and secure banking solutions">
+    <title>{% block title %}ZUBA Banking{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <a class="visually-hidden-focusable" href="#mainContent">Skip to content</a>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top" aria-label="Primary navigation">
+        <div class="container">
+            <a class="logomtavari" href="https://tbcitacademy.ge/" target="_blank" rel="noopener noreferrer">
+                <img src="{{ url_for('static', filename='img/Gemini_Generated_Image_g32sjtg32sjtg32s.png') }}" alt="TBC Logo">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.home') }}">მთავარი</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.about') }}">ჩვენს შესახებ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.how_it_works') }}">როგორ მუშაობს</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.contact') }}">კონტაქტი</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.dashboard') }}">დაშბორდი</a></li>
+                </ul>
+
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    {% if current_user.is_authenticated %}
+                        {% if current_user.is_admin %}
+                            <li class="nav-item"><a class="nav-link text-danger" href="{{ url_for('admin.admin_panel') }}">Admin</a></li>
+                        {% endif %}
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">გამოსვლა</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">შესვლა</a></li>
+                        <li class="nav-item ms-2"><a class="btn btn-primary" href="{{ url_for('auth.register') }}">რეგისტრაცია</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main id="mainContent" class="container mt-4 min-vh-100" role="main">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="row">
+                    <div class="col-12">
+                        {% for cat, msg in messages %}
+                            <div class="alert alert-{{ cat }} alert-dismissible fade show" role="alert">
+                                {{ msg }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="footer mt-5 py-5 bg-dark text-white text-center">
+        <div class="container">
+            <div class="social-links mb-4">
+                <a href="https://www.facebook.com/zuka.abashidze.107081" class="text-white mx-3 fs-4"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/_abashidzeee_/" class="text-white mx-3 fs-4"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/zuka-abashidze-2b0353358/" class="text-white mx-3 fs-4"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/zukaabashidze" class="text-white mx-3 fs-4"><i class="fab fa-github"></i></a>
+            </div>
+
+            <hr class="bg-secondary mb-4 w-25 mx-auto">
+
+            <div class="footer-bottom">
+                <p class="mb-0">© <span id="currentYear"></span> <strong>Zuba Inc.</strong></p>
+                <small class="text-secondary">Created for TBC Tech School</small>
+            </div>
+        </div>
+    </footer>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
