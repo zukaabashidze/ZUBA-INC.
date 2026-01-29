@@ -1,14 +1,14 @@
 import os
 from flask import Flask
-from models import db, User
 from flask_login import LoginManager
+from models import db, User
 
 
-def create_app(test_config=None):
-    app = Flask(__name__, instance_relative_config=False)
+def create_app():
+    app = Flask(__name__)
 
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret')
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///site.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
@@ -21,13 +21,13 @@ def create_app(test_config=None):
     def load_user(user_id):
         return User.query.get(int(user_id))
 
-    from routes.auth import auth as auth_bp
-    from routes.main import main as main_bp
-    from routes.admin import admin as admin_bp
+    from routes.auth import auth
+    from routes.main import main
+    from routes.admin import admin
 
-    app.register_blueprint(auth_bp)
-    app.register_blueprint(main_bp)
-    app.register_blueprint(admin_bp)
+    app.register_blueprint(auth)
+    app.register_blueprint(main)
+    app.register_blueprint(admin)
 
     with app.app_context():
         db.create_all()
@@ -35,10 +35,7 @@ def create_app(test_config=None):
     return app
 
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app = create_app()
-    app.run(
-        host='0.0.0.0',
-        port=int(os.environ.get('PORT', 5000)),
-        debug=False
-    )
+    app.run(debug=True)
